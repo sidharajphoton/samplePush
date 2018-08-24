@@ -1,0 +1,77 @@
+<html>
+    <head>
+	<meta charset="UTF-8">
+    <title>Learnosity SDK - NodeJS</title>
+	<script src="../node_modules/underscore/underscore-min.js"></script>
+	<script src="../node_modules/crypto-js/crypto-js.js"></script>
+	<script src="../node_modules/crypto-js/sha256.js"></script>
+	<script src="../node_modules/moment/moment.js"></script>
+	<script src="../node_modules/learnosity-sdk-nodejs/client.js"></script>	
+	<script src="questions_learnosity.js"></script>
+	<script src="items.js"></script>
+    </head>
+
+    <body>
+	
+	<script>
+	var learnositySdk = new Learnosity();
+		var aaa = "sss";
+		var request = learnositySdk.init(
+   "questions",
+   {
+       "consumer_key": "yis0TYCu7U9V4o7M",
+       "domain":       "localhost",
+       "user_id":      "demo_student"
+   },
+   "74c5fd430cf1242a527f6223aebd42d30464be22",
+   {
+       "type":       "local_practice",
+       "state":      "initial",
+       "questions":  [
+           {
+               "response_id":         "60005",
+               "type":                "association",
+               "stimulus":            "Match the cities to the parent nation.",
+               "stimulus_list":       ["London", "Dublin", "Paris", "Sydney"],
+               "possible_responses":  ["Australia", "France", "Ireland", "England"],
+               "validation": {
+                   "score": 1,
+                   "value": ["England", "Ireland", "France", "Australia"]
+               }
+           }
+       ]
+   }
+  );
+	var initOptions = {
+		"security": {
+			"consumer_key": request.consumer_key,
+			"domain": "localhost",
+			"timestamp": request.timestamp,
+			"signature": request.signature
+		},
+		"request": {
+			"rendering_type": "inline",
+			"user_id": request.user_id,
+			"session_id": "a472317d-9881-4200-8d3d-75342551af80",
+			"type": "local_practice",
+			"activity_id": "emberDemo2013",
+			"name": "Items API demo - inline activity.",
+			"items": [
+				"classification_1",
+				"multiple_choice_1"
+			]
+		}
+	};
+	console.log(request);
+	var questionsApp = LearnosityApp.init(request);
+	console.log(questionsApp);
+	</script>
+	<span class="learnosity-item" data-reference="multiple_choice_1"></span>
+<span class="learnosity-item" data-reference="classification_1"></span>
+<script>
+    //var itemsApp = LearnosityItems.init(initOptions);
+    </script>
+
+
+    </body>
+</html>
